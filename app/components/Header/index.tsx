@@ -14,7 +14,7 @@ import { useAuth } from "@/app/contextApi/AuthContext";
 
 const Header = () => {
   const pathname = usePathname();
-  const { setIsUserLoggedIn, isLoggedIn: isUserLoggedIn } = useAuth();
+  const { setIsUserLoggedIn, logout, isLoggedIn: isUserLoggedIn } = useAuth();
   // const isUserLoggedIn = useAppSelector((state) => state.authReducer.loggedIn);
 
   // Navbar toggle
@@ -46,11 +46,11 @@ const Header = () => {
   //   }
   // };
 
-  const logout = async () => {
-    logout();
-    // const resp = await logoutHandler();
-    // console.log({ resp });
-  };
+  // const logout = async () => {
+  // logout();
+  // const resp = await logoutHandler();
+  // console.log({ resp });
+  // };
 
   const getAccessToken = async () => {
     const cookie = await fetchAccessTokenFromCookie();

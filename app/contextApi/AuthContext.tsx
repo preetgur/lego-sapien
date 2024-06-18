@@ -1,22 +1,24 @@
 "use client";
 
+import { UserInterface } from "@/types/user";
 import React, { createContext, useState, useContext, ReactNode } from "react";
 
 // Define the type for the context value
 interface AuthContextType {
-  user: User | null;
-  setUserLogin: (user: User) => void;
+  user: UserInterface | null;
+  setUserLogin: (user: UserInterface) => void;
+  setUser: (user: UserInterface) => void;
   logout: () => void;
   isLoggedIn: boolean;
   setIsUserLoggedIn: (val: boolean) => void;
 }
 
 // Define the type for the user
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
+// interface User {
+//   id: string;
+//   name: string;
+//   email: string;
+// }
 
 // Create the context with the default value
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -28,10 +30,10 @@ interface AuthProviderProps {
 
 // Create the provider component
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserInterface | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const setUserLogin = (user: User) => {
+  const setUserLogin = (user: UserInterface) => {
     setUser(user);
   };
 
@@ -46,7 +48,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, isLoggedIn, setIsUserLoggedIn, setUserLogin, logout }}
+      value={{
+        user,
+        setUser,
+        isLoggedIn,
+        setIsUserLoggedIn,
+        setUserLogin,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>
