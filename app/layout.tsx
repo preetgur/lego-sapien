@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import LoaderWrapper from "./components/Loader/Loader";
+import { UIProvider } from "./contextApi/UIContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <UIProvider>
+          {children}
+          <LoaderWrapper />
+        </UIProvider>
+      </body>
     </html>
   );
 }
