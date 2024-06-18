@@ -43,7 +43,13 @@ async function refreshAccessToken(refreshToken: string) {
 }
 
 // Function to make an API call
-async function fetchWithToken(path, method, tag, data, token) {
+async function fetchWithToken(
+  path: string,
+  method: "GET" | "POST" | "PATCH" | "DELETE",
+  tag?: string,
+  data?: any,
+  token?: string
+) {
   const response = await fetch(URL + path, {
     method: method,
     headers: {
@@ -51,7 +57,7 @@ async function fetchWithToken(path, method, tag, data, token) {
       Cookie: `access=${token}`,
     },
     ...(method !== "GET" && { body: JSON.stringify(data) }),
-    next: { tags: [tag] },
+    ...(tag && { next: { tags: [tag] } }),
   });
 
   console.log({ fetchWithTokenResponse: response });
@@ -93,7 +99,8 @@ export default async function Fetch(
     return response;
   } catch (error) {
     console.log("#### got error in FETCh ###");
-    if (error?.message === "Unauthorized") {
+
+    if (error instanceof Error && error?.message === "Unauthorized") {
       console.log("#### unauthorized ######");
       const refreshToken = cookies().get(REFRESH_TOKEN)?.value;
       console.log("#### refreshToken ######", { refreshToken });

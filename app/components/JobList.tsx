@@ -6,6 +6,7 @@ import JobCard from "./JobCard";
 import SearchBox from "./SearchBox";
 import LinkButton from "./LinkButton";
 import { getJobPosting } from "../serverActions/job";
+import { JobInterface } from "@/types/job";
 
 async function JobList({ query }: { query: string }) {
   const jobs = await getJobPosting(query);
@@ -29,7 +30,7 @@ async function JobList({ query }: { query: string }) {
 
       <SearchBox />
 
-      {jobs?.results?.map((job) => (
+      {jobs?.results?.map((job: JobInterface) => (
         <JobCard key={job.id} {...job} />
       ))}
     </div>

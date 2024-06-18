@@ -9,7 +9,9 @@ import { useAuth } from "@/app/contextApi/AuthContext";
 const DropdownUser = () => {
   const { logout, user, setUser } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [companyDetail, setCompanyDetail] = useState(null);
+  const [companyDetail, setCompanyDetail] = useState<{
+    company_name: string;
+  } | null>(null);
 
   const { first_name, last_name, company } = user || {};
 
