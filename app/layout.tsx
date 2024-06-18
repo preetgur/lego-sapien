@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import LoaderWrapper from "./components/Loader/Loader";
 import { UIProvider } from "./contextApi/UIContext";
+import "../styles/index.css";
+import "../styles/index2.css";
+import { AuthProvider } from "./contextApi/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,10 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <UIProvider>
-          {children}
-          <LoaderWrapper />
-        </UIProvider>
+        <AuthProvider>
+          <UIProvider>
+            {children}
+            <LoaderWrapper />
+          </UIProvider>
+        </AuthProvider>
       </body>
     </html>
   );
