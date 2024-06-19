@@ -46,6 +46,23 @@ export interface CandidateInterface {
   candidate_language_code?: { label: string; value: string } | string;
 }
 
+export interface FormCandidateInterface {
+  first_name: string;
+  last_name: string;
+  email: string;
+  // experience?: string | number;
+  experience: { label: string; value: string };
+  candidate_level: { label: string; value: string };
+  resume_pdf_base64: string;
+  photo_identity: string;
+  mobile_no: string;
+  candidate_language_code?: { label: string; value: string };
+}
+
+export interface AddCandidateInterface extends FormCandidateInterface {
+  jobId: string | number;
+}
+
 export type UserInterface = {
   email: string;
   first_name: string;

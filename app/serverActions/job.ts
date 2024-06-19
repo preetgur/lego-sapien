@@ -1,7 +1,7 @@
 "use server";
 
 import Fetch from "@/app/lib/fetchHelper";
-import { UpdateCandidateInterface } from "@/types/auth";
+import { AddCandidateInterface, UpdateCandidateInterface } from "@/types/auth";
 import { redirect } from "next/navigation";
 
 export async function getJobPosting(query?: string | undefined) {
@@ -100,3 +100,41 @@ export const updateCandidate = async (body: UpdateCandidateInterface) => {
 
   // revalidateTag("revalidate-job-id-candidate-list");
 };
+
+export async function addCandidate(body: AddCandidateInterface) {
+  const { jobId, ...reqBody } = body;
+
+  try {
+    if (!jobId) {
+      throw new Error("jobId is missing");
+    }
+    const experience = body.experience?.value;
+    const candidate_level = body.candidate_level?.value;
+    const candidate_language_code = (
+      body.candidate_language_code as { label: string; value: string }
+    )?.value;
+    // Check if experience is not null or undefined before including it in the request
+    const requestBody = {
+      ...reqBody,
+      ...(experience != null && { experience: experience }),
+      candidate_level,
+      candidate_language_code,
+    };
+    const url = `/jobpostings/${jobId}/candidates/`;
+    const resp = await Fetch({
+      url,
+      method: "POST",
+      tag: "add-candidate",
+      data: requestBody,
+    });
+    // revalidateTag("revalidate-job-id-candidate-list");
+    // revalidatePath("/dashboard-refactor/job/[id]", "page");
+
+    // return resp;
+  } catch (error) {
+    console.log("add candidate error:", error);
+    // return { error };
+    return Promise.reject(error);
+  }
+  redirect(`/dashboard-refactor/job/${jobId}`);
+}
