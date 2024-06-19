@@ -1,6 +1,11 @@
 "use server";
 import { cookies } from "next/headers";
-import { ACCESS_TOKEN, REFRESH_TOKEN, URL } from "./constants";
+import {
+  ACCESS_TOKEN,
+  FRONTEND_HOSTED_URL,
+  REFRESH_TOKEN,
+  URL,
+} from "./constants";
 
 // Function to refresh the access token
 async function refreshAccessToken(refreshToken: string) {
@@ -24,7 +29,7 @@ async function refreshAccessToken(refreshToken: string) {
 
   // here trigeer route handler to et the cookies
 
-  const resp = await fetch("http://localhost:3000/api/user/token-cookie", {
+  const resp = await fetch(`${FRONTEND_HOSTED_URL}/api/user/token-cookie`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

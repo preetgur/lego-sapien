@@ -1,6 +1,7 @@
 import { JobPostingFields } from "@/types/job";
 
 export const URL = process.env.NEXT_PUBLIC_BASE_URL;
+export const FRONTEND_HOSTED_URL = process.env.NEXT_PUBLIC_FRONTEND_HOSTED_URL;
 
 export const GEOPIFY_API_URL = "https://api.geoapify.com";
 
