@@ -14,7 +14,11 @@ export const fetchAccessTokenFromCookie = async () => {
 export const getUserDetail = async () => {
   try {
     console.log("### server side getUserDetail ###");
-    const resp = await Fetch(`/users/me/`, "GET", "get-user-info");
+    const resp = await Fetch({
+      url: `/users/me/`,
+      method: "GET",
+      tag: "get-user-info",
+    });
     return resp;
   } catch (error) {
     throw error;
@@ -27,7 +31,12 @@ export const login = async (reqBody: LoginInterface) => {
     //   ...reqBody,
     // });
 
-    const res = await Fetch(`/jwt/create/`, "POST", "login-user", reqBody);
+    const res = await Fetch({
+      url: `/jwt/create/`,
+      method: "POST",
+      tag: "login-user",
+      data: reqBody,
+    });
 
     console.log({ res });
     cookies().set(ACCESS_TOKEN, res.data.access, { secure: true });

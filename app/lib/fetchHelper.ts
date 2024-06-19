@@ -84,18 +84,23 @@ async function fetchWithToken(
 }
 
 // Main function to handle the API call with token refresh
-export default async function Fetch(
-  path: string,
-  method: "GET" | "POST" | "PATCH" | "DELETE",
-  tag?: string,
-  data?: Object
-) {
+export default async function Fetch({
+  url,
+  method,
+  tag,
+  data,
+}: {
+  url: string;
+  method: "GET" | "POST" | "PATCH" | "DELETE";
+  tag?: string;
+  data?: Object;
+}) {
   try {
     const accessToken = cookies().get(ACCESS_TOKEN)?.value;
     const rrrrrToken = cookies().get(REFRESH_TOKEN)?.value;
 
     console.log("#### before request ####", { accessToken, rrrrrToken });
-    const response = await fetchWithToken(path, method, tag, data, accessToken);
+    const response = await fetchWithToken(url, method, tag, data, accessToken);
     return response;
   } catch (error) {
     console.log("#### got error in FETCh ###");
@@ -115,7 +120,7 @@ export default async function Fetch(
 
       try {
         const newAccessToken = await refreshAccessToken(refreshToken);
-        return fetchWithToken(path, method, tag, data, newAccessToken);
+        return fetchWithToken(url, method, tag, data, newAccessToken);
       } catch (refreshError) {
         return Promise.reject(refreshError);
       }
