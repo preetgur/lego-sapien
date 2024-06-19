@@ -115,3 +115,9 @@ export interface Owner {
 export interface ResumeZipInterface {
   resumes_zip_file: string;
 }
+
+export interface SendInviteBodyType {
+  job_posting_id: number;
+  candidate_ids: number[];
+  flowType?: "ALL_WEB" | "ALL_WA" | "WA_WEB";
+}

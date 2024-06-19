@@ -23,8 +23,8 @@ type SelectionStatus = {
   label: "In Progress" | "Selected" | "Rejected" | "On Hold";
 };
 export interface CandidateInterface {
-  id?: string | number;
-  jobId?: string | number;
+  id: string | number;
+  jobId: string | number;
   first_name: string;
   last_name: string;
   email: string;
@@ -38,8 +38,8 @@ export interface CandidateInterface {
     questions_generated: string;
   };
   // selection_status: SelectionStatus
-  selection_status?: { label: string; value: string } | null | string;
-  interview_status?: { label: string; value: string } | null | string;
+  selection_status: { label: string; value: string } | null | string;
+  interview_status: { label: string; value: string } | null | string;
   profile_created_at?: string;
   mobile_no?: string;
   was_invite_sent?: boolean;
