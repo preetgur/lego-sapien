@@ -37,7 +37,7 @@ const ActiveLink: FC<ActiveLocalizedLinkProps> = ({
       : href.toString() === pathname,
   });
 
-  console.log({ pathname, href: href.toString(), isSticky, isNavbarOpen });
+  // console.log({ pathname, href: href.toString(), isSticky, isNavbarOpen });
   return (
     <Link className={finalClassName} href={href} {...props}>
       {children}
