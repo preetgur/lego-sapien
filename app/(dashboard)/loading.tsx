@@ -1,15 +1,14 @@
 import React from "react";
-import DashboardSkeleton from "../components/Skeletons/DashboardSkeleton";
+
+import DashboardSkeletonWithHeader from "../components/Skeletons/DashboardSkeletonWithHeader";
 
 function loading() {
   return (
-    <div className="flex w-screen">
-      <div className="pulse h-screen w-72 bg-secondaryBlack"> </div>
-      <div className="flex w-full flex-col">
-        <div className="pulse h-24 w-full bg-secondaryBlack"> </div>
-        <div className="mt-10 w-full px-20">
-          <DashboardSkeleton />
-        </div>
+    <div className=" flex flex-col">
+      {/* <div className="pulse h-screen w-72 bg-secondaryBlack"> </div> */}
+      {/* <div className="pulse h-24 w-full bg-secondaryBlack"> </div> */}
+      <div className=" w-full px-8">
+        <DashboardSkeletonWithHeader />
       </div>
     </div>
   );
