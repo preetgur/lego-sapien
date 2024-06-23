@@ -29,7 +29,9 @@
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.3.0",
     "use-debounce": "^10.0.1",
-    "yup": "^1.4.0"
+    "uuid": "^10.0.0",
+    "yup": "^1.4.0",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -37,6 +39,7 @@
     "@types/react-anchor-link-smooth-scroll": "^1.0.5",
     "@types/react-csv": "^1.1.10",
     "@types/react-dom": "^18",
+    "@types/uuid": "^9.0.8",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
     "postcss": "^8",
