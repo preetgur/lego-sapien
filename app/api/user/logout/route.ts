@@ -1,38 +1,30 @@
-import { ACCESS_TOKEN, URL } from "@/app/lib/constants";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "@/app/lib/constants";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
     const access_token = cookies().get(ACCESS_TOKEN)?.value;
-    console.log({ access_token });
+    const refresh_token = cookies().get(REFRESH_TOKEN)?.value;
 
-    const res = await fetch(`${URL}/logout/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Cookie: `access=${access_token}`,
-      },
-    });
+    console.log({ access_token, refresh_token });
 
-    // console.log({ res })
-    const data = await res.json();
-    if (!res.ok) {
-      throw `Logout failed with status: ${res.status} - ${res.statusText}: `;
-    }
+    cookies().delete(ACCESS_TOKEN);
+    cookies().delete(REFRESH_TOKEN);
 
-    console.log("token :: ", { data });
-    const response = NextResponse.json({
-      message: "logut successful",
-      success: data,
-    });
-    // storing the access token to cookies
-    const aa = response.cookies.get(ACCESS_TOKEN);
-    console.log({ aa });
-    console.log({ coo: cookies().get(ACCESS_TOKEN) });
-    return response;
+    console.log("#### cookies deleted successfully #####");
+    // return NextResponse.json(
+    //   { message: "cookies deleted successfully", redirect: "/sigin" },
+    //   { status: 500 }
+    // );
+
+    // Correctly constructing the URL for redirection
+    const redirectUrl = new URL("/signin", request.url).toString();
+
+    // Using NextResponse.redirect for server-side redirection
+    return NextResponse.redirect(redirectUrl);
   } catch (error: any) {
-    console.log("ERRRR :", error + "");
+    console.log(" /api/user/logout ERRRR :", error + "");
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

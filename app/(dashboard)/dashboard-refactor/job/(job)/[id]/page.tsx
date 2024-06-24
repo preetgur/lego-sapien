@@ -15,6 +15,7 @@ import Await from "@/app/helpers/await";
 import BulkResumeUploader from "@/app/components/BulkResumeUploader";
 import ExportToCSV from "@/app/components/ExportToCSV";
 import CandidateList from "@/app/components/CandidateList";
+import { redirect } from "next/navigation";
 
 const JobDetailPage = async ({
   params,
@@ -33,9 +34,9 @@ const JobDetailPage = async ({
 
   const job = await getJobById(+id);
   console.log({ job });
-  // const jobPromise = getJobById(+id);
 
-  // if (job?.status === 401) redirect("/signin");
+  if (job?.status === 401) redirect("/signin");
+
   const {
     intro_message,
     email_subject,

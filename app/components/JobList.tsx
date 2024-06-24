@@ -7,14 +7,18 @@ import SearchBox from "./SearchBox";
 import LinkButton from "./LinkButton";
 import { getJobPosting } from "../serverActions/job";
 import { JobInterface } from "@/types/job";
+import { redirect } from "next/navigation";
 
 async function JobList({ query }: { query: string }) {
   const jobs = await getJobPosting(query);
   console.log({ jobList: jobs });
 
-  if (jobs?.isRedirectToLogin) {
-    throw new Error("remove-cookie-redirect-to-login");
+  if (jobs?.status === 401) {
+    redirect("/signin");
   }
+  // if (jobs?.isRedirectToLogin) {
+  //   throw new Error("remove-cookie-redirect-to-login");
+  // }
   return (
     <div className="my-4">
       <div className=" z-1 flex flex-col items-center justify-between rounded-md border-none bg-secondaryBlack px-4 pt-6 pb-4 shadow-box 2xsm:flex-row">

@@ -6,6 +6,7 @@ import {
   REFRESH_TOKEN,
   URL,
 } from "./constants";
+import { deleteCookies } from "../serverActions/auth";
 
 // Function to refresh the access token
 async function refreshAccessToken(refreshToken: string) {
@@ -20,6 +21,24 @@ async function refreshAccessToken(refreshToken: string) {
   console.log({ response });
   if (!response.ok) {
     if (response.status === 401) {
+      console.log("###### isRedirectToLogin #########", response);
+
+      // delete cookies here
+      const resp = await fetch(`${FRONTEND_HOSTED_URL}/api/user/logout`, {
+        method: "POST",
+      });
+
+      console.log({ respONe: resp });
+
+      // if (!resp.ok) {
+      //   console.log("### response not ok heree ");
+      //   throw new Error("refresh token expire");
+      // }
+
+      // const routeresp11 = await resp.json();
+
+      // console.log({ routeresp11 });
+
       return { status: 401, isRedirectToLogin: true };
     }
     throw new Error("Failed to refresh token");
@@ -55,6 +74,8 @@ async function fetchWithToken(
   data?: any,
   token?: string
 ) {
+  console.log("### ----- URL ------####", URL + path);
+  console.log({ tag, method, url: URL + path });
   const response = await fetch(URL + path, {
     method: method,
     headers: {
@@ -116,6 +137,13 @@ export default async function Fetch({
       console.log("#### refreshToken ######", { refreshToken });
 
       if (!refreshToken) {
+        console.log("#### no refresh token ######");
+        // TODO: if  not works properly then uncomment below code
+        const resp = await fetch(`${FRONTEND_HOSTED_URL}/api/user/logout`, {
+          method: "POST",
+        });
+        // await deleteCookies();
+
         return {
           status: 401,
           statusText: "Unauthorized",

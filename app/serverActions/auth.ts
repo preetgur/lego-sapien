@@ -46,3 +46,15 @@ export const login = async (reqBody: LoginInterface) => {
     throw error;
   }
 };
+
+export async function deleteCookies() {
+  console.log("#### delete coookies ####");
+  const access_token = cookies().get(ACCESS_TOKEN)?.value;
+  const refresh_token = cookies().get(REFRESH_TOKEN)?.value;
+
+  console.log({ access_token, refresh_token });
+
+  cookies().delete(ACCESS_TOKEN);
+  cookies().delete(REFRESH_TOKEN);
+  redirect("/signin");
+}
