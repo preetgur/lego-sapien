@@ -50,7 +50,7 @@ function CandidateSearchBox() {
               onChange={(e) => handleSearch(e.target.value)}
               defaultValue={hasQuery}
               placeholder={"Search Candidate"}
-              className={`focus-visible:shadow-none  w-full rounded-md border border-transparent border-primary bg-white py-3 px-6 text-base text-secondaryBlack  placeholder-graydark shadow-one outline-none`}
+              className={`focus-visible:shadow-none  w-full rounded-md border border-primary bg-white py-3 px-6 text-base text-secondaryBlack  placeholder-graydark shadow-one outline-none`}
             />
 
             {hasQuery && (
