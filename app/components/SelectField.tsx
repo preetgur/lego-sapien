@@ -34,19 +34,19 @@ type SelectFieldProps<TFormValues extends FieldValues> = {
   error?: string;
 };
 
-const SelectField: React.FC<SelectFieldProps<FieldValues>> = ({
+const SelectField = <TFormValues extends FieldValues>({
   label,
   name,
   placeholder,
   className,
   control,
   ...props
-}) => {
+}: SelectFieldProps<TFormValues>) => {
   return (
     <>
       <FormField
         control={control}
-        name={name}
+        name={name as FieldPath<TFormValues>}
         render={({ field }) => (
           <CustomSelect
             {...field}

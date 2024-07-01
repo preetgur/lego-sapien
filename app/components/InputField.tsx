@@ -1,13 +1,18 @@
 import { cn } from "@/app/lib/utils";
 import React from "react";
-import { UseFormRegister, FieldValues, FieldError } from "react-hook-form";
+import {
+  UseFormRegister,
+  FieldValues,
+  FieldError,
+  FieldPath,
+} from "react-hook-form";
 
-interface InputFieldProps {
+interface InputFieldProps<TFieldValues extends FieldValues> {
   label?: string;
-  name: string;
+  name: FieldPath<TFieldValues>;
   type: string;
   placeholder?: string;
-  register: UseFormRegister<FieldValues>;
+  register: UseFormRegister<TFieldValues>;
   error?: string;
   isRequiredField?: boolean;
   className?: string;
@@ -61,7 +66,7 @@ const TextAreaField = React.forwardRef<HTMLTextAreaElement, TextAreaFieldProps>(
 
 TextAreaField.displayName = "TextAreaField";
 
-const InputField: React.FC<InputFieldProps> = ({
+const InputField = <TFieldValues extends FieldValues>({
   label,
   name,
   register,
@@ -69,7 +74,7 @@ const InputField: React.FC<InputFieldProps> = ({
   className,
   isRequiredField = false,
   ...props
-}) => {
+}: InputFieldProps<TFieldValues>) => {
   return (
     <div className={cn("w-full", className)}>
       {label && (
