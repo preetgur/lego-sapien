@@ -27,20 +27,22 @@ function TechCard({
   experience_range,
   language_code,
   flow_type,
+  qb_category_ids,
+  should_terminate_on_fitment_fail,
 }: Job_API_RESPONSE_INTERFACE) {
   const SHOULD_DATA = [
     {
       value: should_ask_followup,
-      label: "Follow Up",
+      label: "Ask Follow Up Questions",
     },
-    {
-      value: should_record_video,
-      label: "Record Video",
-    },
-    {
-      value: should_virtual_interviewer_call,
-      label: "Virtual Interview Call",
-    },
+    // {
+    //   value: should_record_video,
+    //   label: "Record Video",
+    // },
+    // {
+    //   value: should_virtual_interviewer_call,
+    //   label: "Virtual Interview Call",
+    // },
   ];
 
   const QUESTIONS_DATA = [
@@ -96,12 +98,11 @@ function TechCard({
       <TechWrapper title="Must Have" list={job_primary_technologies} />
       <TechWrapper title="Good To Have" list={job_secondary_technologies} />
 
-      {/* TODO: implement in future */}
-      {/* <div className="mt-3 flex flex-wrap gap-5">
+      <div className="mt-3 flex flex-wrap gap-5">
         {SHOULD_DATA.map((item) => (
           <TextIconWrapper isIcon key={item.label} {...item} />
         ))}
-      </div> */}
+      </div>
 
       {job_location && (
         <div className=" mt-2 flex flex-col sm:flex-row sm:flex-wrap sm:space-x-6">
@@ -162,10 +163,19 @@ function TechCard({
       />
 
       <JDSection
+        label="Question Bank"
+        value={qb_category_ids?.map((val) => val).join(", ") ?? "--"}
+      />
+
+      <JDSection
         label="Interview Flow Type"
         value={flow_type ? getFlowType(flow_type as string)?.label : "--"}
       />
 
+      <JDSection
+        label="Terminate Interview on Fitment Failed"
+        value={should_terminate_on_fitment_fail ? "Yes" : "No"}
+      />
       <div className="mt-3 flex flex-wrap gap-5">
         {QUESTIONS_DATA.map((item) => (
           <TextIconWrapper key={item.label} {...item} />

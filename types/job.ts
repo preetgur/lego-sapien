@@ -9,6 +9,7 @@ export interface Job_API_RESPONSE_INTERFACE {
   job_title: string;
   job_type: "WFO" | "Hybrid" | "WFH";
   job_description: string;
+  qb_category_ids: string[];
   job_primary_technologies: Array<{ label: string; value: string }>;
   job_secondary_technologies: Array<{ label: string; value: string }>;
   sector_name: { label: string; value: string };
@@ -50,6 +51,7 @@ export interface Job_API_RESPONSE_INTERFACE {
   should_ask_fitment_questions: boolean;
   language_code?: { label: string; value: string } | string;
   flow_type?: { label: string; value: string } | string;
+  should_terminate_on_fitment_fail: boolean;
 }
 
 export interface CreateJobInterface {
