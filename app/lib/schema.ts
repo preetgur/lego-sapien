@@ -208,7 +208,7 @@ export const JOB_POSTING_SCHEMA = yup.object({
   ),
 });
 
-const MOBILE_NUMBER_REGEX = /^\+[\d\s()-]*$/;
+const MOBILE_NUMBER_REGEX = /^[\d\s()-]*$/;
 
 export const CANDIDATE_SCHEMA = yup.object({
   [FIRST_NAME]: yup
@@ -224,7 +224,7 @@ export const CANDIDATE_SCHEMA = yup.object({
     .required("Mobile Number is Required")
     .matches(
       MOBILE_NUMBER_REGEX,
-      "Invalid mobile number format. Use +919814198141 format."
+      "Invalid mobile number format. Use 9814198141 format."
     )
     .min(10, "Mobile Number should have at least 10 digits.")
     .max(15, "Mobile Number should not exceed 15 digits."),
