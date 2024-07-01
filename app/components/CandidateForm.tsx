@@ -20,8 +20,10 @@ import {
   LAST_NAME,
   MOBILE_NUMBER,
   PDF,
+  COUNTRY_CODE,
+  COUNTRY_CODE_LIST,
 } from "@/app/lib/constants";
-import { FormCandidateInterface } from "@/types/auth";
+import { AddCandidateInterface, FormCandidateInterface } from "@/types/auth";
 
 import { CANDIDATE_SCHEMA } from "@/app/lib/schema";
 
@@ -37,7 +39,7 @@ const defaultValues = {
   // [PROFILE]: "",
   // [EXPERIENCE]: "",
   [EMAIL]: "",
-  [MOBILE_NUMBER]: "",
+  // [MOBILE_NUMBER]: "",
 };
 const fileDefaultValues = {
   [IMAGE]: null,
@@ -52,6 +54,10 @@ const DropdownDefaultValues = {
   [CANDIDATE_LANGUAGE]: {
     value: "en",
     label: "English",
+  },
+  [COUNTRY_CODE]: {
+    value: "+91",
+    label: "+91",
   },
 };
 
@@ -236,11 +242,42 @@ export default function CandidateForm() {
                   );
                 })}
 
+                <div className="flex w-1/2 flex-col px-4 ">
+                  <label className="mb-3 block text-sm font-semibold text-secondaryBlack dark:text-secondaryBlack">
+                    Mobile Number
+                    <span className="items-center text-primary">*</span>
+                  </label>
+
+                  <div className="flex w-full space-x-2">
+                    <SelectField
+                      wrapperClassName="flex  w-36 p-0"
+                      name={COUNTRY_CODE}
+                      control={control}
+                      // label="Candidate Level"
+                      options={COUNTRY_CODE_LIST}
+                      placeholder="Select Country Code"
+                      closeMenuOnSelect={true}
+                      isMulti={false}
+                      // error={errors?.candidate_level?.message}
+                    />
+                    <InputField
+                      className={`mb-4 w-full `}
+                      name={MOBILE_NUMBER}
+                      type={CANDIDATE_FIELDS[MOBILE_NUMBER].type}
+                      // label={CANDIDATE_FIELDS[MOBILE_NUMBER].label}
+                      placeholder={CANDIDATE_FIELDS[MOBILE_NUMBER].placeholder}
+                      register={register}
+                      error={errors[MOBILE_NUMBER]?.message}
+                      isRequiredField
+                    />
+                  </div>
+                </div>
+
                 <div className="mb-4 w-full px-4 md:w-1/2">
                   <SelectField
                     wrapperClassName="flex w-full"
                     name={CANDIDATE_LEVEL}
-                    control={control as any}
+                    control={control}
                     label="Candidate Level"
                     options={CANDIDATE_LEVEL_TYPES}
                     placeholder="Select Candidate Level"
@@ -254,7 +291,7 @@ export default function CandidateForm() {
                   <SelectField
                     wrapperClassName="flex w-full"
                     name={EXPERIENCE}
-                    control={control as any}
+                    control={control}
                     label="Experience"
                     options={EXPERIENCE_RANGE_TYPES}
                     placeholder="Select Experience"
@@ -267,7 +304,7 @@ export default function CandidateForm() {
                 <div className="w-full px-4 md:w-1/2">
                   <SelectField
                     name={CANDIDATE_LANGUAGE}
-                    control={control as any}
+                    control={control}
                     label="Candidate Language"
                     options={LANGUAGE_LIST}
                     placeholder="Select Language"
