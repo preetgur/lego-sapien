@@ -6,6 +6,7 @@ import {
   CATEGORY,
   CITY,
   COUNTRY,
+  COUNTRY_CODE,
   CTC_MAX,
   CTC_MIN,
   CURRENCY,
@@ -234,6 +235,7 @@ export const CANDIDATE_SCHEMA = yup.object({
   [IMAGE]: yup.mixed().notRequired(),
   [PDF]: yup.mixed().notRequired(),
   [CANDIDATE_LANGUAGE]: yup.object().notRequired(),
+  [COUNTRY_CODE]: yup.object().notRequired(),
 });
 
 export const QUESTION_BANK_SCHEMA = yup.object({

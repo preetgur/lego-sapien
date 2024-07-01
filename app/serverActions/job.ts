@@ -108,6 +108,8 @@ export async function addCandidate(body: AddCandidateInterface) {
     if (!jobId) {
       throw new Error("jobId is missing");
     }
+    const mobile_no = body.country_code?.value + body.mobile_no;
+    console.log({ mobile_no });
     const experience = body.experience?.value;
     const candidate_level = body.candidate_level?.value;
     const candidate_language_code = (
@@ -119,6 +121,7 @@ export async function addCandidate(body: AddCandidateInterface) {
       ...(experience != null && { experience: experience }),
       candidate_level,
       candidate_language_code,
+      mobile_no,
     };
     const url = `/jobpostings/${jobId}/candidates/`;
     const resp = await Fetch({

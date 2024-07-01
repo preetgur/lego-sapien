@@ -57,6 +57,7 @@ export const COMMUNICATION_SKILLS = "communication_skills";
 export const PHOTO_IDENTITY_BASE64 = "photoidentity_base64";
 export const CANDIDATE_LEVEL = "candidate_level";
 export const STUDENT = "STUDENT";
+export const COUNTRY_CODE = "country_code";
 // candidate social links
 export const LINKEDIN = "linkedin";
 export const GITHUB = "github";
@@ -1175,4 +1176,19 @@ export const FLOW_TYPE_LIST = [
   { value: "ALL_WEB", label: "Fitment and Interview on Web" },
   { value: "ALL_WA", label: "Fitment and Interview on Whatsapp" },
   { value: "WA_WEB", label: "Fitment on Whatsapp and Interview on Web" },
+];
+
+export const COUNTRY_CODE_LIST = [
+  {
+    value: "+91",
+    label: "+91",
+  },
+  {
+    value: "+1",
+    label: "+1",
+  },
+  {
+    value: "+442333",
+    label: "+44333",
+  },
 ];

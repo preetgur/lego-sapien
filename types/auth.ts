@@ -60,7 +60,8 @@ export interface FormCandidateInterface {
 }
 
 export interface AddCandidateInterface extends FormCandidateInterface {
-  jobId: string | number;
+  jobId?: string | number | null;
+  country_code: { label: string; value: string };
 }
 
 export type UserInterface = {
